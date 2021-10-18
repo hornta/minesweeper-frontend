@@ -1,5 +1,5 @@
 import { MouseEventHandler, useEffect, useRef } from "react";
-import { Board } from "@hornta/minesweeper";
+import { Board, BoardState } from "@hornta/minesweeper";
 import { Square } from "./square";
 import { useMinesweeperBoard } from "./use-minesweeper";
 import "./minesweeper-board.css";
@@ -25,6 +25,10 @@ export const MinesweeperBoard = ({ board }: MinesweeperBoard) => {
   }, []);
 
   const handleMouseDown: MouseEventHandler<HTMLElement> = (e) => {
+    if (board.getState() !== BoardState.Ongoing) {
+      return;
+    }
+
     if (e.button === 0) {
       e.currentTarget.classList.add("mouse-down");
     }
