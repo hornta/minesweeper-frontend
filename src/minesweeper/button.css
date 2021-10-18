@@ -1,0 +1,31 @@
+.button {
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: white;
+  border-left-color: white;
+  border-right-color: rgb(123 123 123);
+  border-bottom-color: rgb(123 123 123);
+  background-color: rgb(189 189 189);
+  padding: 0.4em 1em;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+}
+
+.button:hover {
+  background-color: rgb(202 202 202);
+}
+
+.button[aria-pressed="true"],
+.button:active {
+  border-top-color: rgb(123 123 123);
+  border-left-color: rgb(123 123 123);
+  border-bottom-color: white;
+  border-right-color: white;
+}
+
+.button:disabled {
+  color: rgb(50, 50, 50);
+  background-color: rgb(180 180 180);
+  border-right-color: rgb(153 153 153);
+  border-bottom-color: rgb(153 153 153);
+}

@@ -1,0 +1,27 @@
+.minesweeper-controls {
+  text-align: center;
+  padding: 1em;
+}
+
+.minesweeper-controls form {
+  padding-top: 0.5em;
+}
+
+.minesweeper-controls label:not(:last-of-type) {
+  margin-right: 2em;
+}
+
+.minesweeper-controls label:last-of-type {
+  margin-right: 1em;
+}
+
+.minesweeper-controls input {
+  border: 1px solid slategrey;
+  width: 70px;
+  padding: 0.3em 0.4em;
+}
+
+.minesweeper-controls input:read-only {
+  background-color: #d5d5d5;
+  border-color: #6f6f6f;
+}

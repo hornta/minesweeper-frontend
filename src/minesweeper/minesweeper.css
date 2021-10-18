@@ -1,0 +1,9 @@
+.inset-area {
+  border-width: 4px;
+  border-style: solid;
+  border-top-color: #7b7b7b;
+  border-left-color: #7b7b7b;
+  border-right-color: white;
+  border-bottom-color: white;
+  margin-bottom: 1em;
+}
