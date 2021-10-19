@@ -1,0 +1,70 @@
+.minesweeper-square {
+  width: 32px;
+  height: 32px;
+  border: none;
+  display: block;
+  float: left;
+  image-rendering: pixelated;
+}
+
+.minesweeper-square:focus-visible {
+  outline: black dashed 4px;
+  position: relative;
+}
+
+.minesweeper-square-unknown {
+  background-image: url("./icons/unknown.png");
+}
+
+.mouse-down.minesweeper-square-unknown:active,
+.minesweeper-square-0 {
+  background-image: url("./icons/0.png");
+}
+
+.minesweeper-square-1 {
+  background-image: url("./icons/1.png");
+}
+
+.minesweeper-square-2 {
+  background-image: url("./icons/2.png");
+}
+
+.minesweeper-square-3 {
+  background-image: url("./icons/3.png");
+}
+
+.minesweeper-square-4 {
+  background-image: url("./icons/4.png");
+}
+
+.minesweeper-square-5 {
+  background-image: url("./icons/5.png");
+}
+
+.minesweeper-square-6 {
+  background-image: url("./icons/6.png");
+}
+
+.minesweeper-square-7 {
+  background-image: url("./icons/7.png");
+}
+
+.minesweeper-square-8 {
+  background-image: url("./icons/8.png");
+}
+
+.minesweeper-square-flag {
+  background-image: url("./icons/flag.png");
+}
+
+.minesweeper-square-mine {
+  background-image: url("./icons/mine-revealed.png");
+}
+
+.minesweeper-incorrectly-marked {
+  background-image: url("./icons/incorrectly-revealed-mine.png");
+}
+
+.minesweeper-square-player-revealed {
+  background-image: url("./icons/player-revealed-mine.png");
+}

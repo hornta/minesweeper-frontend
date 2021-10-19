@@ -1,18 +1,28 @@
-import {
-  Board,
-  BoardState,
-  SquareType,
-  MinesweeperEvents,
-} from "@hornta/minesweeper";
-import classnames from "classnames";
+import { Board, SquareType, MinesweeperEvents } from "@hornta/minesweeper";
 import {
   useRef,
   KeyboardEventHandler,
   useCallback,
   useEffect,
   RefCallback,
-  FocusEventHandler,
 } from "react";
+
+const square2Class: Record<SquareType, string> = {
+  [SquareType.Zero]: "minesweeper-square-0",
+  [SquareType.One]: "minesweeper-square-1",
+  [SquareType.Two]: "minesweeper-square-2",
+  [SquareType.Three]: "minesweeper-square-3",
+  [SquareType.Four]: "minesweeper-square-4",
+  [SquareType.Five]: "minesweeper-square-5",
+  [SquareType.Six]: "minesweeper-square-6",
+  [SquareType.Seven]: "minesweeper-square-7",
+  [SquareType.Eight]: "minesweeper-square-8",
+  [SquareType.Flagged]: "minesweeper-square-flag",
+  [SquareType.IncorrectlyFlagged]: "minesweeper-incorrectly-marked",
+  [SquareType.PlayerRevealedMine]: "minesweeper-square-player-revealed",
+  [SquareType.RevealedMine]: "minesweeper-square-mine",
+  [SquareType.Unopened]: "minesweeper-square-unknown",
+};
 
 export const useMinesweeperBoard = (board: Board) => {
   const squareRefs = useRef<HTMLButtonElement[]>([]);
@@ -74,23 +84,8 @@ export const useMinesweeperBoard = (board: Board) => {
 
     const onUpdate: MinesweeperEvents["update"] = (updates) => {
       for (const update of updates) {
-        const isOpen = update.value >= 0;
-        const isFlagged = update.value === SquareType.Flagged;
-        const isMine =
-          update.value === SquareType.RevealedMine ||
-          update.value === SquareType.PlayerRevealedMine;
-
-        const classes = classnames("minesweeper-square", {
-          "minesweeper-square-mine": isMine,
-          "minesweeper-incorrectly-marked":
-            update.value === SquareType.IncorrectlyFlagged,
-          "minesweeper-player-mine":
-            update.value === SquareType.PlayerRevealedMine,
-          "minesweeper-square-open": isOpen,
-          "minesweeper-square-flag": isFlagged,
-          ["minesweeper-square-" + update.value]: isOpen && !isMine,
-        });
-        squareRefs.current[update.index].className = classes;
+        squareRefs.current[update.index].className =
+          "minesweeper-square " + square2Class[update.value as SquareType];
 
         let label: string;
         switch (update.value) {
@@ -122,7 +117,8 @@ export const useMinesweeperBoard = (board: Board) => {
     squareRefs.current = squareRefs.current.slice(0, board.getSquares().length);
 
     for (const square of squareRefs.current) {
-      square.className = "minesweeper-square";
+      square.className =
+        "minesweeper-square " + square2Class[SquareType.Unopened];
     }
 
     return () => {

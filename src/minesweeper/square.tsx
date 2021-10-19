@@ -1,4 +1,5 @@
-import { forwardRef, LegacyRef } from "react";
+import { forwardRef } from "react";
+import "./square.css";
 
 export interface SquareProps
   extends React.DetailedHTMLProps<
@@ -18,7 +19,6 @@ export const Square = forwardRef<HTMLButtonElement, SquareProps>(
         {...props}
         ref={ref}
         className="minesweeper-square"
-        style={{ transform: "translate(" + x * 32 + "px, " + y * 32 + "px)" }}
         onContextMenu={(e) => {
           e.preventDefault();
           onFlag(x, y);
