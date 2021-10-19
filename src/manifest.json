@@ -1,0 +1,21 @@
+{
+  "name": "Minesweeper",
+  "short_name": "Minesweeper",
+  "categories": ["games"],
+  "lang": "en-US",
+  "theme_color": "#bdbdbd",
+  "background_color": "khaki",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
