@@ -1,23 +1,48 @@
 .minesweeper-controls {
-  text-align: center;
+  margin-bottom: 2em;
+}
+
+.minesweeper-controls .preset-selections {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
   padding: 1em;
+}
+
+@media only screen and (min-width: 400px) {
+  .minesweeper-controls .preset-selections {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+.minesweeper-controls .preset-selections .button {
+  display: block;
+  flex: 1;
+}
+
+@media only screen and (min-width: 400px) {
+  .minesweeper-controls .preset-selections .button {
+    flex: none;
+  }
 }
 
 .minesweeper-controls form {
   padding-top: 0.5em;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto;
+  gap: 1em;
 }
 
-.minesweeper-controls label:not(:last-of-type) {
-  margin-right: 2em;
-}
-
-.minesweeper-controls label:last-of-type {
-  margin-right: 1em;
+@media only screen and (min-width: 400px) {
+  .minesweeper-controls form {
+    grid-template-columns: min-content min-content min-content max-content;
+  }
 }
 
 .minesweeper-controls input {
   border: 1px solid slategrey;
-  width: 70px;
+  max-width: 70px;
   padding: 0.3em 0.4em;
 }
 

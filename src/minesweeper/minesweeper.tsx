@@ -3,11 +3,10 @@ import { Board } from "@hornta/minesweeper";
 import { MinesweeperBoard } from "./minesweeper-board";
 import { MinesweeperControls } from "./minesweeper-controls";
 import "./minesweeper.css";
+import { Preset, presetData } from "./presets";
 
 const defaultOptions = {
-  width: 16,
-  height: 16,
-  mines: 60,
+  ...presetData[Preset.Easy],
   seed: Math.random(),
 };
 

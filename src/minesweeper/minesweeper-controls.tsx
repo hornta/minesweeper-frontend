@@ -3,59 +3,12 @@ import { useEffect, useState } from "react";
 import { Button } from "./button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import "./minesweeper-controls.css";
+import { Inputs, Preset, presetData, retrievePresetFromData } from "./presets";
 
 export interface MinesweeperControlsProps {
   board: Board;
   onChange: (options: BoardOptions) => void;
 }
-
-export enum Preset {
-  Training,
-  Easy,
-  Moderate,
-  Hard,
-  Insane,
-  Custom,
-}
-
-type Inputs = {
-  width: number;
-  height: number;
-  mines: number;
-};
-
-const presetData: Record<Preset, Inputs> = {
-  [Preset.Training]: {
-    width: 9,
-    height: 9,
-    mines: 10,
-  },
-  [Preset.Easy]: {
-    width: 16,
-    height: 16,
-    mines: 60,
-  },
-  [Preset.Moderate]: {
-    width: 30,
-    height: 16,
-    mines: 99,
-  },
-  [Preset.Hard]: {
-    width: 50,
-    height: 50,
-    mines: 500,
-  },
-  [Preset.Insane]: {
-    width: 100,
-    height: 100,
-    mines: 2000,
-  },
-  [Preset.Custom]: {
-    width: 30,
-    height: 16,
-    mines: 120,
-  },
-};
 
 export const MinesweeperControls = ({
   board,
@@ -75,7 +28,13 @@ export const MinesweeperControls = ({
     };
   }, []);
 
-  const [preset, setPreset] = useState(Preset.Easy);
+  const [preset, setPreset] = useState(() => {
+    return retrievePresetFromData({
+      width: board.getWidth(),
+      height: board.getHeight(),
+      mines: board.getMines(),
+    });
+  });
   const { register, handleSubmit, reset } = useForm<Inputs>({
     defaultValues: presetData[preset],
   });
@@ -93,91 +52,86 @@ export const MinesweeperControls = ({
 
   return (
     <div className="minesweeper-controls">
-      <Button
-        onClick={() => {
-          setPreset(Preset.Training);
-        }}
-        aria-pressed={preset === Preset.Training}
-      >
-        Training
-      </Button>
-      <Button
-        onClick={() => {
-          setPreset(Preset.Easy);
-        }}
-        aria-pressed={preset === Preset.Easy}
-      >
-        Easy
-      </Button>
-      <Button
-        onClick={() => {
-          setPreset(Preset.Moderate);
-        }}
-        aria-pressed={preset === Preset.Moderate}
-      >
-        Moderate
-      </Button>
-      <Button
-        onClick={() => {
-          setPreset(Preset.Hard);
-        }}
-        aria-pressed={preset === Preset.Hard}
-      >
-        Hard
-      </Button>
-      <Button
-        onClick={() => {
-          setPreset(Preset.Insane);
-        }}
-        aria-pressed={preset === Preset.Insane}
-      >
-        Insane
-      </Button>
-      <Button
-        onClick={() => {
-          setPreset(Preset.Custom);
-        }}
-        aria-pressed={preset === Preset.Custom}
-      >
-        Custom
-      </Button>
+      <div className="preset-selections">
+        <Button
+          onClick={() => {
+            setPreset(Preset.Easy);
+          }}
+          aria-pressed={preset === Preset.Easy}
+        >
+          Easy
+        </Button>
+        <Button
+          onClick={() => {
+            setPreset(Preset.Moderate);
+          }}
+          aria-pressed={preset === Preset.Moderate}
+        >
+          Moderate
+        </Button>
+        <Button
+          onClick={() => {
+            setPreset(Preset.Hard);
+          }}
+          aria-pressed={preset === Preset.Hard}
+        >
+          Hard
+        </Button>
+        <Button
+          onClick={() => {
+            setPreset(Preset.Custom);
+          }}
+          aria-pressed={preset === Preset.Custom}
+        >
+          Custom
+        </Button>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>
-          Width:
-          <input
-            type="number"
-            readOnly={preset !== Preset.Custom}
-            {...register("width", {
-              min: 3,
-              max: 400,
-              valueAsNumber: true,
-            })}
-          />
-        </label>
-        <label>
-          Height:
-          <input
-            type="number"
-            readOnly={preset !== Preset.Custom}
-            {...register("height", {
-              min: 3,
-              max: 400,
-              valueAsNumber: true,
-            })}
-          />
-        </label>
-        <label>
-          Mines:
-          <input
-            type="number"
-            readOnly={preset !== Preset.Custom}
-            {...register("mines", {
-              min: 1,
-              valueAsNumber: true,
-            })}
-          />
-        </label>
-        <Button type="submit">New game</Button>
+        <div>
+          <label>
+            <div>Width:</div>
+            <input
+              type="number"
+              min={3}
+              max={400}
+              readOnly={preset !== Preset.Custom}
+              {...register("width", {
+                valueAsNumber: true,
+              })}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            <div>Height:</div>
+            <input
+              type="number"
+              readOnly={preset !== Preset.Custom}
+              min={3}
+              max={400}
+              {...register("height", {
+                valueAsNumber: true,
+              })}
+            />
+          </label>{" "}
+        </div>
+        <div>
+          <label>
+            <div>Mines:</div>
+            <input
+              type="number"
+              readOnly={preset !== Preset.Custom}
+              min={1}
+              {...register("mines", {
+                min: 1,
+                valueAsNumber: true,
+              })}
+            />
+          </label>{" "}
+        </div>
+        <div style={{ alignSelf: "self-end" }}>
+          <Button type="submit">New game</Button>
+        </div>
       </form>
     </div>
   );

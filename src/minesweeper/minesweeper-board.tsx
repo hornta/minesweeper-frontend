@@ -73,40 +73,43 @@ export const MinesweeperBoard = ({ board }: MinesweeperBoard) => {
         <button
           className="minesweeper-square minesweeper-square-flag"
           style={{ position: "relative", marginRight: "0.7em" }}
+          disabled
         ></button>{" "}
         <span ref={mineCountRef}></span>
       </div>
-      <div
-        className="minesweeper-board inset-area"
-        ref={boardRef}
-        style={{
-          width: 32 * board.getWidth(),
-          height: 32 * board.getHeight(),
-        }}
-        onKeyDown={squareKeyDownHandler}
-      >
-        {board.getSquares().map((_, index) => {
-          const y = Math.floor(index / board.getWidth());
-          const x = index % board.getWidth();
+      <div style={{ overflow: "auto", padding: "0 1em" }}>
+        <div
+          className="minesweeper-board inset-area"
+          ref={boardRef}
+          style={{
+            width: 32 * board.getWidth(),
+            height: 32 * board.getHeight(),
+          }}
+          onKeyDown={squareKeyDownHandler}
+        >
+          {board.getSquares().map((_, index) => {
+            const y = Math.floor(index / board.getWidth());
+            const x = index % board.getWidth();
 
-          return (
-            <Square
-              key={index}
-              x={x}
-              y={y}
-              tabIndex={index === 0 ? 0 : -1}
-              ref={addSquareRef}
-              onFlag={(x, y) => {
-                board.flag(x, y);
-              }}
-              onOpen={(x, y) => {
-                board.open(x, y);
-              }}
-              aria-label="Unknown"
-              onMouseDown={handleMouseDown}
-            />
-          );
-        })}
+            return (
+              <Square
+                key={index}
+                x={x}
+                y={y}
+                tabIndex={index === 0 ? 0 : -1}
+                ref={addSquareRef}
+                onFlag={(x, y) => {
+                  board.flag(x, y);
+                }}
+                onOpen={(x, y) => {
+                  board.open(x, y);
+                }}
+                aria-label="Unknown"
+                onMouseDown={handleMouseDown}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );

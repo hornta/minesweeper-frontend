@@ -36,5 +36,9 @@
     "directory": "packages/minesweeper-web",
     "type": "git",
     "url": "https://github.com/hornta/minesweeper.git"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
